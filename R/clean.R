@@ -22,3 +22,16 @@ leave_vars <- function(vars_vec, fun.stay = T){
     rm(list = ls(envir = env)[!ls(envir = env) %in% vars_vec], envir = env)
   }
 }
+
+group_vars <- function(pattern = NULL, inside = c("list", "env")){
+  all_vars <- ls()
+  unq_var <- c()
+  for(vrs in all_vars){
+    shortest_var <- all_vars[which.min(nchar(all_vars))]
+    similar_vars <- agrep(shortest_var, x = all_vars, max.distance = 0)
+    if(similar_vars<1){
+      assign(paste0(shortest_var, "_temp"))
+    }
+  }
+}
+
